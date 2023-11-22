@@ -1,6 +1,6 @@
 import React from "react";
 import { MdOutlineDeleteOutline, MdEditNote, MdOutlineCheckBox, MdOutlineCheckBoxOutlineBlank} from 'react-icons/md'
-const Table = () => {
+const Table = ({todos, setTodos, isLoading}) => {
     return (
 
 
@@ -18,16 +18,24 @@ const Table = () => {
 
             
             <tbody>
-                <tr>
-                    <td className="p-3"><span className="inline-block cursor-pointer"><MdOutlineCheckBox /></span></td>
-                    <td className="p-3 text-sm">Lorem ipsum dolor sit.</td>
-                    <td className="p-3 text-sm text-center"><span className="p-1 text-xs text-center font-medium tracking-wider rounded-md bg-green-300">done</span></td>
-                    <td className="p-3 text-sm">22-04-23</td>
-                    <td className="p-3 text-sm font-medium grid grid-flow-col items-center mt-5">
-                      <span className="text-xl cursor-pointer"><MdEditNote /></span>
-                      <span className="text-xl cursor-pointer"><MdOutlineDeleteOutline /></span>
-                    </td>
-                </tr>
+            {isLoading ? <div> Is Loading</div> :
+            <>
+                { todos.map((todoItem, index) => {
+                    return (
+                        <tr key={todoItem.id} className="border-b border-black">
+                        <td className="p-3" title={todoItem.id}><span className="inline-block cursor-pointer">{todoItem.completed ? <MdOutlineCheckBox /> : <MdOutlineCheckBoxOutlineBlank />}</span></td>
+                        <td className="p-3 text-sm">{todoItem.body}</td>
+                        <td className="items-center pr-25 p-3 text-sm text-center"><span className={`p-1 text-xs text-center font-medium tracking-wider rounded-md ${todoItem.completed ?  'bg-green-300' : 'bg-red-300'}`}>{todoItem.completed ?  'Oldu!:)' : 'Olmadi:('}</span></td>
+                        <td className="p-3 text-sm">{new Date(todoItem.created).toLocaleString()}</td>
+                        <td className="p-3 text-sm font-medium grid grid-flow-col items-center mt-5">
+                        <span className="text-xl cursor-pointer"><MdEditNote /></span>
+                        <span className="text-xl cursor-pointer"><MdOutlineDeleteOutline /></span>
+                        </td>
+                    </tr>
+                    )
+                
+                })
+                }</>}
             </tbody>
             </table>
             
