@@ -14,9 +14,6 @@ const TodoForm = ({setTodos, fetchData}) => {
   }
 
   const postTodo = async () =>{
-    function refreshPage() {
-      window.location.reload(false);
-    }
 
     try {
       await axios.post('http://127.0.0.1:8000/api/todo/', newTodo)

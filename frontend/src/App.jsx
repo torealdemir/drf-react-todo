@@ -34,8 +34,9 @@ const fetchData = async() => {
     fetchData = {fetchData}/>
     <Table
     todos = {todos}
-    seto = {setTodos}
+    setTodos = {setTodos}
     isLoading = {isLoading}
+    fetchData = {fetchData}
     />
     
   </div>
